@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\RequestController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,4 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/profanity-api/pure-filipino', [RequestController::class, 'pureFilipino'])->name('request.pureFilipino');
+Route::get('/profanity-api/regional', [RequestController::class, 'regional'])->name('request.regional');
+Route::get('/profanity-api/pure-filipino-and-regional', [RequestController::class, 'both'])->name('request.both');
+
 require __DIR__.'/auth.php';
