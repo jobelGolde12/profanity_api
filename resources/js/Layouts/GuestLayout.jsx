@@ -1,18 +1,41 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 
 export default function GuestLayout({ children }) {
-    return (
-        <div className="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
-            <div>
-                <Link href="/">
-                    <ApplicationLogo className="h-20 w-20 fill-current text-gray-500" />
-                </Link>
-            </div>
+    const { url } = usePage();
 
-            <div className="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg">
-                {children}
-            </div>
+    return (
+        <div>
+            <nav className="w-full bg-white shadow">
+                <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+                    <h1 className="text-xl font-bold text-blue-600">Free API</h1>
+                    <div className="space-x-6">
+
+                        {/* Home Link */}
+                        <Link
+                            href={route('home')}
+                            className={`${
+                                url === '/' ? 'font-bold text-gray-800' : 'font-semibold text-gray-700'
+                            }`}
+                        >
+                            Home
+                        </Link>
+
+                        {/* About Link */}
+                        <Link
+                            href={route('about')}
+                            className={`${
+                                url.startsWith('/about')
+                                    ? 'font-bold text-gray-800'
+                                    : 'text-gray-600'
+                            }`}
+                        >
+                            About
+                        </Link>
+                    </div>
+                </div>
+            </nav>
+
+            {children}
         </div>
     );
 }

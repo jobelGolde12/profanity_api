@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "@inertiajs/react";
+import { Link, Head } from "@inertiajs/react";
+import GuestLayout from "@/Layouts/GuestLayout";
 
 export default function Welcome() {
   const [output, setOutput] = useState({
@@ -41,20 +42,8 @@ export default function Welcome() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Navbar */}
-      <nav className="w-full bg-white shadow">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-xl font-bold text-blue-600">Free API</h1>
-          <div className="space-x-6">
-            <a href="#" className="font-semibold text-gray-700">
-              Home
-            </a>
-            <a href="#" className="text-gray-600">
-              About
-            </a>
-          </div>
-        </div>
-      </nav>
+    <Head title="Profanity API" />
+     <GuestLayout>
 
       {/* Header */}
       <div className="text-center my-8">
@@ -107,18 +96,6 @@ export default function Welcome() {
         >
           Full Fetch Code
         </Link>
-        <Link
-          href="/pages/code"
-          className="bg-gray-900 text-white px-4 py-2 rounded"
-        >
-          Full Fetch Code
-        </Link>
-        <Link
-          href="/pages/code"
-          className="bg-gray-900 text-white px-4 py-2 rounded"
-        >
-          Full Fetch Code
-        </Link>
       </div>
 
       {/* API Info Placeholder */}
@@ -135,7 +112,7 @@ export default function Welcome() {
       )}
 
       {/* Output */}
-      <div className="max-w-4xl mx-auto mt-4 px-4">
+      <div className=" mx-auto mt-4 px-4 w-[85%]">
         <div className="bg-gray-900 text-gray-100 p-4 rounded shadow">
           <h3 className="text-lg font-bold mb-2">{output.title}</h3>
           <pre className="whitespace-pre-wrap">
@@ -143,6 +120,7 @@ export default function Welcome() {
           </pre>
         </div>
       </div>
+    </GuestLayout>
     </div>
   );
 }
