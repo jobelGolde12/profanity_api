@@ -14,6 +14,7 @@ export default function Welcome() {
   const [showApiInfo, setShowApiInfo] = useState(false);
   const [apiUrl, setApiUrl] = useState("");
   const [highlightedJson, setHighlightedJson] = useState("");
+  const [status, setStatus] = useState(0);
 
   //  JSON highlighter
   function highlightJSON(jsonString) {
@@ -100,7 +101,7 @@ export default function Welcome() {
 
   if (type === "pure") {
     const title = "Pure Filipino Bad Words";
-    const url = route("request.pureFilipino"); 
+    const url = '/api/profanity/filipino'; 
 
     try {
       console.log("Fetching:", url);
@@ -108,7 +109,7 @@ export default function Welcome() {
       if (!response.ok) throw new Error("Network response was not ok");
 
       const newApi = await response.json();
-
+      setStatus(response.status);
       setOutput({ title, data: newApi });
       setApiUrl(url);
       setShowApiInfo(true);
@@ -119,7 +120,7 @@ export default function Welcome() {
   } else if (type === "regional") {
     const title = 'Regional Profanity Words';
     try {
-       const url = route("request.regional"); 
+       const url = '/api/profanity/regional'; 
       const response = await fetch(url);
       if (!response.ok) throw new Error("Network response was not ok");
 
@@ -135,7 +136,7 @@ export default function Welcome() {
   } else if (type === "both") {
     const title = 'Pure Filipino + Regional Bad Words';
     try {
-       const url = route("request.both"); 
+       const url = '/api/profanity/combined'; 
       const response = await fetch(url);
       if (!response.ok) throw new Error("Network response was not ok");
 
@@ -208,19 +209,11 @@ export default function Welcome() {
           </ul>
         </div>
 
-        <div className="max-w-6xl mx-auto mt-6 flex justify-end space-x-2 px-4">
-          <Link
-            href="/pages/code"
-            className="bg-gray-900 text-white px-4 py-2 rounded"
-          >
-            Full Fetch Code
-          </Link>
-        </div>
-
         {/* API Info */}
         {showApiInfo && (
           <div className="max-w-4xl mx-auto mt-4 px-4 py-3 bg-white border rounded flex justify-between items-center shadow">
-            <span className="truncate">{apiUrl}</span>
+            <span className="text-back font-bold border-r border-gray-700 pe-2">GET</span>
+            <span className="truncate">{`http://${window.location.hostname}${apiUrl}`}</span>
             <button
               onClick={copyToClipboard}
               className="border px-3 py-1 rounded text-sm"
@@ -230,10 +223,22 @@ export default function Welcome() {
           </div>
         )}
 
+        
         {/* Output */}
-        <div className="mx-auto mt-4 px-4 w-[85%]">
+        <div className="mx-auto mt-4 px-4 w-[85%] overflow-scroll"
+        style={{ maxHeight: "70vh" }}
+        >
           <div className="bg-gray-900 text-gray-100 p-4 rounded shadow">
-            <h3 className="text-lg font-bold mb-2">{output.title}</h3>
+           <div className="flex justify-between">
+             <h3 className="text-lg font-bold mb-2">{output.title}</h3>
+             {status ? 
+              <div>
+                  <h5>Status: <span>{ status || 'N/A'}</span></h5>
+              </div>
+              :
+              <></>
+              }
+           </div>
             <pre
               className="whitespace-pre-wrap"
               style={{
