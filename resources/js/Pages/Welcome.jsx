@@ -213,7 +213,7 @@ export default function Welcome() {
         {showApiInfo && (
           <div className="max-w-4xl mx-auto mt-4 px-4 py-3 bg-white border rounded flex justify-between items-center shadow">
             <span className="text-back font-bold border-r border-gray-700 pe-2">GET</span>
-            <span className="truncate">{`http://${window.location.hostname}${apiUrl}`}</span>
+            <span className="truncate">{`http://${window.location.hostname}:8000${apiUrl}`}</span>
             <button
               onClick={copyToClipboard}
               className="border px-3 py-1 rounded text-sm"
