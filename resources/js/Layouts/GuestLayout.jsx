@@ -20,6 +20,15 @@ export default function GuestLayout({ children }) {
                             Home
                         </Link>
 
+                        <Link
+                            href={route('other-endpoint')}
+                            className={`${
+                                url === '/other-endpoint' ? 'font-bold text-gray-800' : 'font-semibold text-gray-700'
+                            }`}
+                        >
+                            Other Endpoint
+                        </Link>
+
                         {/* About Link */}
                         <Link
                             href={route('about')}

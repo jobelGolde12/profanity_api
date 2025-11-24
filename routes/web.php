@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\OtherEndpointController;
 use App\Http\Controllers\RequestController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -26,4 +27,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/other-endpoint', [OtherEndpointController::class, 'index'])->name('other-endpoint');
 require __DIR__.'/auth.php';

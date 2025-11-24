@@ -15,7 +15,6 @@ private function formatResponse($data, $status = 200)
     $acceptHeader = strtolower(request()->header('Accept', ''));
     $formatParam = strtolower(request()->get('format', ''));
 
-    // 1. Explicit query parameter takes highest priority
     if ($formatParam === 'json') {
         return response()->json($data, $status);
     }
@@ -24,7 +23,6 @@ private function formatResponse($data, $status = 200)
         return $this->convertToXml($data, $status);
     }
 
-    // 2. Accept header checks
     if (str_contains($acceptHeader, 'application/json') ||
         str_contains($acceptHeader, 'json')) 
     {
@@ -38,8 +36,6 @@ private function formatResponse($data, $status = 200)
         return $this->convertToXml($data, $status);
     }
 
-    // 3. Fallback when Accept: */*
-    // DEFAULT → return JSON
     return response()->json($data, $status);
 }
 
