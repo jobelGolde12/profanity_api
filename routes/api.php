@@ -14,4 +14,4 @@ Route::prefix('profanity')->name('profanity.')->group(function () {
     Route::put('/filipino/{id}', [RequestController::class, 'updateFilipino'])->name('filipino.update');
     Route::put('/regional/{id}', [RequestController::class, 'updateRegional'])->name('regional.update');
 });
-
+Route::get('/debug-headers', [RequestController::class, 'debugHeaders']);
