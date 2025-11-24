@@ -173,18 +173,23 @@ private function arrayToXml($data, &$xml)
     }
 
     public function both()
-    {
-        try {
-            $api1 = PureFilipinoModel::all();
-            $api2 = RegionalModel::all();
-            $combined = $api1->toBase()->merge($api2)->values();
-            Log::info('Combined data fetched', ['count' => $combined->count()]);
-            return $this->formatResponse($combined);
-        } catch (\Exception $e) {
-            Log::error('Error in both: ' . $e->getMessage());
-            return response()->json(['error' => 'Internal Server Error'], 500);
-        }
+{
+    try {
+        $api1 = PureFilipinoModel::all();
+        $api2 = RegionalModel::all();
+
+        $combined = $api1->toBase()->merge($api2)->values();
+
+        Log::info('Combined data fetched', ['count' => $combined->count()]);
+
+        return $this->formatResponse($combined->toArray());
+
+    } catch (\Exception $e) {
+        Log::error('Error in both: ' . $e->getMessage());
+        return response()->json(['error' => 'Internal Server Error'], 500);
     }
+}
+
 
     public function storeFilipino(Request $request)
     {
