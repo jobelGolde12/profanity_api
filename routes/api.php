@@ -13,5 +13,8 @@ Route::prefix('profanity')->name('profanity.')->group(function () {
 
     Route::put('/filipino/{id}', [RequestController::class, 'updateFilipino'])->name('filipino.update');
     Route::put('/regional/{id}', [RequestController::class, 'updateRegional'])->name('regional.update');
+
+    Route::delete('/filipino/{id}', [RequestController::class, 'deleteFilipino'])->name('filipino.delete');
+    Route::delete('/regional/{id}', [RequestController::class, 'deleteRegional'])->name('regional.delete');
 });
 Route::get('/debug-headers', [RequestController::class, 'debugHeaders']);

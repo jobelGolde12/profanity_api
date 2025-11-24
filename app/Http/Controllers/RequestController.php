@@ -276,4 +276,67 @@ private function arrayToXml($data, &$xml)
         'full_url' => request()->fullUrl()
     ]);
 }
+     /**
+     * Delete Filipino profanity word by ID
+     */
+    public function deleteFilipino($id)
+    {
+        try {
+            $word = PureFilipinoModel::findOrFail($id);
+            $word->delete();
+
+            return $this->formatResponse([
+                'message' => 'Filipino profanity word deleted successfully',
+                'deleted_id' => (int)$id
+            ], 200);
+
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            Log::warning('Filipino word not found for deletion', ['id' => $id]);
+            return $this->formatResponse([
+                'error' => 'Filipino profanity word not found',
+                'id' => $id
+            ], 404);
+
+        } catch (\Exception $e) {
+            Log::error('Failed to delete Filipino word', [
+                'id' => $id,
+                'error' => $e->getMessage()
+            ]);
+            return $this->formatResponse([
+                'error' => 'An error occurred while deleting the Filipino profanity word'
+            ], 500);
+        }
+    }
+
+    /**
+     * Delete Regional profanity word by ID
+     */
+    public function deleteRegional($id)
+    {
+        try {
+            $word = RegionalModel::findOrFail($id);
+            $word->delete();
+
+            return $this->formatResponse([
+                'message' => 'Regional profanity word deleted successfully',
+                'deleted_id' => (int)$id
+            ], 200);
+
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            Log::warning('Regional word not found for deletion', ['id' => $id]);
+            return $this->formatResponse([
+                'error' => 'Regional profanity word not found',
+                'id' => $id
+            ], 404);
+
+        } catch (\Exception $e) {
+            Log::error('Failed to delete Regional word', [
+                'id' => $id,
+                'error' => $e->getMessage()
+            ]);
+            return $this->formatResponse([
+                'error' => 'An error occurred while deleting the Regional profanity word'
+            ], 500);
+        }
+    }
 }
