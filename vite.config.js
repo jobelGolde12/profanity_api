@@ -10,4 +10,11 @@ export default defineConfig({
         }),
         react(),
     ],
+
+    // This fixes mixed-content in Railway
+    server: {
+        https: true,
+        strictPort: true,
+        host: true,
+    },
 });
