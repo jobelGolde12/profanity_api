@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import GuestLayout from '@/Layouts/GuestLayout';
 const OtherEndpoints = () => {
   const BASE_URL = 'http://127.0.0.1:8000/api';
   
@@ -126,7 +126,8 @@ const OtherEndpoints = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+    <GuestLayout>
+        <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
@@ -383,6 +384,7 @@ const OtherEndpoints = () => {
         )}
       </div>
     </div>
+    </GuestLayout>
   );
 };
 
