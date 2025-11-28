@@ -12,9 +12,9 @@ export default defineConfig({
     ],
 
     // This fixes mixed-content in Railway
-    server: {
-        https: true,
-        strictPort: true,
-        host: true,
-    },
+   // server: {
+    //    https: true,
+     //   strictPort: true,
+     //   host: true,
+   // },
 });

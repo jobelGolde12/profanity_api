@@ -60,7 +60,8 @@ private function formatResponse($data, $status = 200)
             }
         }
         
-        Log::info('Data prepared for XML', ['data_sample' => array_slice($data, 0, 2)]);
+        Log::info('Data prepared for XML', ['data_sample' => is_array($data) ? array_slice($data, 0, 2) : $data]);
+
         
         // Create XML with a root element
         $xml = new \SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><response></response>');
@@ -143,7 +144,6 @@ private function arrayToXml($data, &$xml)
     
     return $key;
 }
-    // Your existing methods remain the same
     public function pureFilipino()
     {
         try {
@@ -206,7 +206,7 @@ private function arrayToXml($data, &$xml)
     public function storeRegional(Request $request)
     {
         $request->validate([
-            'word' => 'required|string|unique:pure_filipino,word'
+            'word' => 'required|string|unique:regional,word'
         ]);
         
         try {

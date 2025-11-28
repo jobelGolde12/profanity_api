@@ -3,6 +3,14 @@
 use App\Http\Controllers\RequestController;
 use Illuminate\Support\Facades\Route;
 
+Route::options('{any}', function () {
+    return response('', 200)
+        ->header('Access-Control-Allow-Origin', '*')
+        ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
+        ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+})->where('any', '.*');
+
+
 Route::prefix('profanity')->name('profanity.')->group(function () {
     Route::get('/filipino', [RequestController::class, 'pureFilipino'])->name('filipino');
     Route::get('/regional', [RequestController::class, 'regional'])->name('regional');

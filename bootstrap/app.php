@@ -12,15 +12,21 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+
+        // Web Middleware
         $middleware->web(append: [
             \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
 
-        
-    $middleware->api(append: [
-        \App\Http\Middleware\XmlBodyParser::class,
-    ]);
+        // API Middleware (CORS MUST RUN FIRST)
+        $middleware->api(prepend: [
+            \Illuminate\Http\Middleware\HandleCors::class,
+        ]);
+
+        $middleware->api(append: [
+            \App\Http\Middleware\XmlBodyParser::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
