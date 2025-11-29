@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
 const OtherEndpoints = () => {
-  const BASE_URL = 'http://profanityapi-production.up.railway.app/api';
+  const BASE_URL = 'https://profanityapi-production.up.railway.app/api';
   
   // State for form data
   const [filipinoWord, setFilipinoWord] = useState('');
